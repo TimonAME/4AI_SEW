@@ -1,0 +1,6 @@
+npm create vue@latest
+npm install
+npm install tailwindcss
+npm install postcss-loader
+npx tailwindcss init
+npm update
