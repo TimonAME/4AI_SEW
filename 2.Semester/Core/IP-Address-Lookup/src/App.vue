@@ -1,18 +1,12 @@
 <template>
   <div>
     <!-- InputIP with search event -->
-    <InputIP @searchIP="search" />
+    <InputURL />
   </div>
 </template>
 
 <script setup>
-import InputIP from "./components/InputIP.vue";
-
-// event when search is clicked
-const search = (ip) => {
-  console.log("processing ip address: " + ip);
-
-};
+import InputURL from "./components/InputURL.vue";
 </script>
 
 <style lang="scss" scoped>
