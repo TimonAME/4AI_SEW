@@ -7,10 +7,6 @@ export default {
   theme: {
     extend: {},
     colors: {
-      'dark-background': '#292929',
-      'dark-background-secondary': '#121212',
-      'dark-background-tertiary': '#1f1f1f',
-      'dark-primary': '#bb86fc',
     },
     screens: {
       'sm': '640px',
