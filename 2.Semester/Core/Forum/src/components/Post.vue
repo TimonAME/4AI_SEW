@@ -1,10 +1,15 @@
 <template>
-    <div class="bg-white p-4 my-4 shadow-md rounded">
-      <h2 class="text-xl font-bold mb-2">{{ post.title }}</h2>
-      <p class="text-gray-600 mb-2">{{ post.timestamp }}</p>
-      <p>{{ post.content }}</p>
-      <!-- Add any additional post content or extension elements here -->
-    </div>
+<div class="flex bg-white shadow-lg rounded-lg mx-4 md:mx-auto my-4 max-w-md md:max-w-2xl "><!--horizantil margin is just for display-->
+   <div class="flex items-start px-4 py-6">
+      <div class="">
+         <div class="flex items-center justify-between">
+            <h2 class="text-lg font-semibold text-gray-900 -mt-1">{{ post.title }}</h2>
+            <small class="text-sm text-gray-700">{{ post.timestamp }}</small><!--22h ago-->
+         </div>
+         <p class="mt-3 text-gray-700 text-sm">{{ post.content }}</p>
+      </div>
+   </div>
+</div>
 </template>
   
   <script>
@@ -14,4 +19,6 @@
     },
   };
   </script>
+  
+
   

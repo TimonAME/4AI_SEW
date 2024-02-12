@@ -1,6 +1,6 @@
 <template>
   <div class="min-h-screen bg-gray-100 text-gray-800 p-4">
-    <div class="z-50 fixed top-0 left-0 right-0 bg-white p-4 shadow-md">
+    <div class=" fixed top-0 left-0 right-0 bg-slate-200 p-4 shadow-md">
       <create-post @post-created="addPost" />
     </div>
     
@@ -13,6 +13,7 @@
 <script>
 import CreatePost from "./components/CreatePost.vue";
 import Post from "./components/Post.vue";
+
 
 export default {
   components: {
