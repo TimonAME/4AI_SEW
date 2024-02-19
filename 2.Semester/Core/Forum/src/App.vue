@@ -10,27 +10,18 @@
   </div>
   </template>
 
-<script>
-import CreatePost from "./components/CreatePost.vue";
-import Post from "./components/Post.vue";
+<script setup>
+import {ref} from 'vue';
+import {defineComponent} from "vue";
+import CreatePost from "@/components/CreatePost.vue";
+import Post from "@/components/Post.vue";
 
+let posts = ref([]);
 
-export default {
-  components: {
-    CreatePost,
-    Post,
-  },
-  data() {
-    return {
-      posts: [],
-    };
-  },
-  methods: {
-    addPost(post) {
-      this.posts.push(post);
-    },
-  },
-};
+function addPost(post) {
+  posts.value.push(post);
+}
+
 </script>
 
 <style scoped>

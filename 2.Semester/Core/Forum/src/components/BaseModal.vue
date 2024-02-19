@@ -20,7 +20,7 @@
                 <Transition name="modal-inner">
                     <div
                     v-if="modalActive"
-                    class="p-4 bg-white self-start mt-32 max-w-screen-md rounded-md"
+                    class="p-4 bg-black self-start mt-32 max-w-screen-md rounded-md"
                     @click.stop>
                         <!--
                             v-if="modalActive" shows the modal when modalActive is true
