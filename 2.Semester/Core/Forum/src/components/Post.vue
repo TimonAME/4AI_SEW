@@ -10,7 +10,7 @@
           <p class="mt-3 text-gray-700 text-sm max-w-md break-words">{{ post.content }}</p>
           <button
               @click="toggleModal"
-              class="bg-blue-300 hover:bg-blue-400 text-white text-left  py-2 px-4 rounded border"
+              class="bg-blue-500 hover:bg-blue-400 text-white text-left  py-2 px-4 rounded border"
           > Create Comment</button>
         </div>
       </div>
@@ -21,8 +21,7 @@
 </template>
   
 <script setup>
-import {computed, defineProps, onMounted, onUnmounted} from 'vue';
-import Comment from "@/components/Comment.vue";
+import {defineProps} from 'vue';
 import { ref } from 'vue';
 import Post from "@/components/Post.vue";
 import Overlay from "@/components/Overlay.vue";

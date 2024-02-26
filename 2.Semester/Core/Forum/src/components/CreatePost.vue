@@ -11,7 +11,6 @@
 </template>
 
 <script setup>
-import BaseModal from './BaseModal.vue';
 import {ref} from 'vue'
 import Overlay from "@/components/Overlay.vue";
 const emit = defineEmits(['inFocus', 'submit']);

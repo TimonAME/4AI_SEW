@@ -1,6 +1,5 @@
 <!-- Customizable Info Screen with close button-->
 <template>
-  <Teleport to="body">
     <Transition name="modal-outer">
       <div
           v-show="modalActive"
@@ -16,14 +15,14 @@
 
             <slot />
 
-            <form v-on:submit.prevent class="flex flex-col">
+            <form @submit.prevent="createPost" class="flex flex-col">
               <label for="title">Title:</label>
               <input id="title" v-model="post.title" type="text" required class="border" />
 
               <label for="content">Content:</label>
               <textarea id="content" v-model="post.content" required class="border"></textarea>
 
-              <button @click="$emit('posting')">Create Post</button>
+              <button type="submit">Create Post</button>
             </form>
 
             <button
@@ -35,7 +34,6 @@
         </Transition>
       </div>
     </Transition>
-  </Teleport>
 </template>
 
 <script setup>
@@ -56,12 +54,10 @@ defineProps (
       }
     }
 )
-defineEmits (
-    [
-      "close-modal",
-      "posting"
-    ]
-)
+const emit = defineEmits(["close-modal", "posting"])
+const createPost = () => {
+  emit("posting");
+}
 </script>
 
 <style scoped>

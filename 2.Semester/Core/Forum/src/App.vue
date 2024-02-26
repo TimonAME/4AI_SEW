@@ -12,7 +12,6 @@
 
 <script setup>
 import {ref} from 'vue';
-import {defineComponent} from "vue";
 import CreatePost from "@/components/CreatePost.vue";
 import Post from "@/components/Post.vue";
 
