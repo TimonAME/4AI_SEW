@@ -4,6 +4,8 @@ import { ref } from 'vue'
 const props = defineProps({
   product: Object
 })
+
+const emit = defineEmits(["delete", "edit"])
 </script>
 
 <template>
@@ -13,8 +15,15 @@ const props = defineProps({
       <img class="w-full rounded-xl" :src="product.image" alt="Product Image" />
       <p class="absolute top-0 bg-yellow-300 text-gray-800 font-semibold py-1 px-3 rounded-br-lg rounded-tl-lg">{{ product.price }} €</p>
     </div>
-    <h1 class="mt-4 text-gray-800 text-2xl font-bold cursor-pointer">{{ product.title }}</h1>
-    <p>{{ product.content }}</p>
-    <button class="mt-4 mb-3 text-xl w-full text-white bg-indigo-600 py-2 rounded-xl shadow-lg">Buy Lesson</button>
+    <p class="mt-4">{{ product.content }}</p>
+    <div class="flex justify-between">
+      <button class="mt-4 mb-3 px-6 text-xl text-white bg-indigo-600 py-2 rounded-xl shadow-lg">Buy Product</button>
+      <div>
+        <!-- Button for deleting a product    -->
+        <button class="mt-4 mb-3 mr-1 px-2 text-xl text-white bg-red-600 py-2 rounded-xl shadow-lg" @click="$emit('delete', product.id)">Delete</button>
+        <!-- Button for editing a product      -->
+        <button class="mt-4 mb-3 px-2 text-xl text-white bg-green-600 py-2 rounded-xl shadow-lg" @click="$emit('edit', product.id)">Edit</button>
+      </div>
+    </div>
   </div>
 </template>
