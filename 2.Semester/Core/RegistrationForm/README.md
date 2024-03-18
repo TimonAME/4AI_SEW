@@ -1,29 +1,21 @@
-# RegistrationForm
+SEW | CORE | Registrationform
 
-This template should help get you started developing with Vue 3 in Vite.
+## User Story 1
+*As an admin, I need validation within the registration form, so that I am sure to have validated data from my users.*
 
-## Recommended IDE Setup
-
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
-
-## Project Setup
-
-```sh
-npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Compile and Minify for Production
-
-```sh
-npm run build
-```
+### Acceptance Criteria
+- A registration form using VueJS is created.
+- The following fields are present (all fields marked with * are mandatory):
+  - Firstname*
+  - Lastname*
+  - E-Mail* (must have a valid format)
+  - Birthday*
+  - Phonenumber
+  - Password* (at least 3 characters)
+  - Password repeat (must match the first password field)  
+- Initially no error messages are displayed.
+- Inputs are immediately validated, not only on submitting the form.
+- In case of a validation error a meaningful error message is presented to the user.
+- An error message is displayed for every input field.
+- The submit button is only clickable, if there are no errors in the registration form.
+- Use the library [vuelidate](https://vuelidate.js.org/) for validation.
