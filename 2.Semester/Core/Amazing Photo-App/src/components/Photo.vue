@@ -27,7 +27,22 @@ const capturePhoto = async () => {
   const url = URL.createObjectURL(photoBlob);
   photoUrl.value = url;
   photos.value.push({ id: photos.value.length + 1, name: `Photo ${photos.value.length + 1}`, url });
+
+  console.log("Photo captured");
 };
+/*
+const capturePhoto = () => {
+  const canvas = document.createElement('canvas');
+  canvas.width = video.value.videoWidth;
+  canvas.height = video.value.videoHeight;
+  canvas.getContext('2d').drawImage(video.value, 0, 0);
+  const url = canvas.toDataURL('image/png');
+  photoUrl.value = url;
+  photos.value.push({ id: photos.value.length + 1, name: `Photo ${photos.value.length + 1}`, url });
+
+  console.log("Photo captured");
+};
+ */
 </script>
 
 <style scoped>
