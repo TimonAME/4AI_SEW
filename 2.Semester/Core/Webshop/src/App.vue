@@ -8,7 +8,7 @@
         class="fixed z-10 top-0 right-0 mt-4 mr-4 text-xl w-1/4 text-white bg-indigo-600 py-2 rounded-xl shadow-lg"
         @click="newProduct()"
     >Create new Product</button>
-    <Overlay :modalActive="modalActive" @close-modal="toggleModal" @post="addProduct" :currentProduct="currentProduct" />
+    <Overlay :modalActive="modalActive" @close-modal="toggleModal" @post="addProduct" @update="updateProduct" :currentProduct="currentProduct" :productOrigin="productOrigin"/>
   </div>
   <div class="z-20 grid grid-cols-4 gap-4 p-10">
     <Product v-for="product in products" :key="product.id" :product="product" @delete="deleteProduct" @edit="editProduct" />
@@ -74,8 +74,11 @@ const products = ref([/*
   */
   ]);
 
+// If the product is being edited or created
+let productOrigin = ref(null);
 // Create new Product
 const newProduct = () => {
+  productOrigin.value = true;
   toggleModal();
 }
 
@@ -84,10 +87,17 @@ const deleteProduct = (id) => {
 }
 
 const currentProduct = ref(null)
-
 const editProduct = (id) => {
+  productOrigin.value = false;
   currentProduct.value = products.value.find(product => product.id === id)
   toggleModal()
+}
+const updateProduct = (updatedProduct) => {
+  const index = products.value.findIndex(product => product.id === updatedProduct.id);
+  if (index !== -1) {
+    products.value[index] = updatedProduct;
+  }
+  currentProduct.value = ref(null)
 }
 
 const addProduct = (product) => {

@@ -10,16 +10,17 @@
       <Transition name="modal-inner">
         <div
             v-if="modalActive"
-            class="p-4  self-start mt-32 max-w-screen-md "
+            class="p-4  self-start mt-16 max-w-screen-md "
             @click.stop>
             <div class="max-w-md bg-white px-6 pt-6 pb-2 rounded-xl shadow-lg transform hover:scale-105 transition duration-500">
               <div class="heading text-center font-bold text-2xl text-gray-800 mb-5">New Post</div>
 
-              <div class="editor">
-                <input class="title bg-gray-100 border border-gray-300 p-2 mb-4 outline-none" v-model="title" spellcheck="false" placeholder="Title" type="text">
-                <input class="image-link bg-gray-100 border border-gray-300 p-2 mb-4 outline-none" v-model="image" spellcheck="false" placeholder="Image Link" type="text">
-                <input class="price bg-gray-100 border border-gray-300 p-2 mb-4 outline-none" v-model="price" spellcheck="false" placeholder="Price" type="number">
-                <textarea class="description bg-gray-100 sec p-3 h-60 border border-gray-300 outline-none" v-model="description" spellcheck="false" placeholder="Describe everything about this post here"></textarea>
+              <!-- https://tailwindcomponents.com/component/post-making-form -->
+              <div class="editor p-4 m-4 space-y-2">
+                <input class="bg-gray-100 border border-gray-300 p-2 outline-none w-full" v-model="title" spellcheck="false" placeholder="Title" type="text">
+                <input class="bg-gray-100 border border-gray-300 p-2 outline-none w-full" v-model="image" spellcheck="false" placeholder="Image Link" type="text">
+                <input class="bg-gray-100 border border-gray-300 p-2 outline-none w-full" v-model="price" spellcheck="false" placeholder="Price" type="number">
+                <textarea class="bg-gray-100 p-3 h-60 border border-gray-300 outline-none w-full" v-model="description" spellcheck="false" placeholder="Describe everything about this post here"></textarea>
               </div>
 
               <!-- icons -->
@@ -41,32 +42,33 @@
 </template>
 
 <script setup>
-import { defineProps, defineEmits } from 'vue'
+import {defineProps, defineEmits, watch} from 'vue'
 import { ref } from 'vue'
 
-defineProps (
-    {
-      modalActive: {
-        type: Boolean,
-        default: false
-      },
-      currentProduct: {
-        type: Object,
-        default: {}
-      }
-    }
-)
-const emit = defineEmits(["close-modal", "post"])
+const props = defineProps({
+  modalActive: {
+    type: Boolean,
+    default: false
+  },
+  // The current product that is being edited
+  currentProduct: {
+    type: Object,
+    default: null
+  },
+  // If the product is being edited or created
+  productOrigin: {
+    type: Boolean,
+    default: false
+  }
+})
+const emit = defineEmits(["close-modal", "post", "update"])
 
 const title = ref('')
 const image = ref('')
 const price = ref('')
 const description = ref('')
 
-//TODO: when current product is not empty, fill the inputs with the current product's values
-
 const postProduct = () => {
-  //if (!title.value || !image.value || !price.value || !description.value) return alert('Please fill all fields')
   if (!title.value) title.value = 'No Title'
   if (!image.value) image.value = 'https://images.unsplash.com/photo-1541701494587-cb58502866ab?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80'
   if (!price.value) price.value = 0
@@ -75,13 +77,32 @@ const postProduct = () => {
   //close modal emit
   emit('close-modal');
 
-  emit('post', { title: title.value, image: image.value, price: price.value, content: description.value, id: Math.random() })
+  // Check if we are editing an existing product
+  if (!props.productOrigin) {
+    // Update the existing product
+    emit('update', { title: title.value, image: image.value, price: price.value, content: description.value, id: props.currentProduct.id })
+  } else {
+    // Create a new product
+    emit('post', { title: title.value, image: image.value, price: price.value, content: description.value, id: Math.random() })
+  }
 
-  title.value = ''
-  image.value = ''
-  price.value = ''
-  description.value = ''
+  title.value = ''; image.value = ''; price.value = ''; description.value = '';
 }
+
+const fillInputs = () => {
+  if (!props.productOrigin) {
+    title.value = props.currentProduct.title
+    image.value = props.currentProduct.image
+    price.value = props.currentProduct.price
+    description.value = props.currentProduct.content
+  }
+};
+
+watch(() => props.modalActive, (newValue) => {
+  if (newValue) {
+    fillInputs();
+  }
+});
 </script>
 
 <style scoped>

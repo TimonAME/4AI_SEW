@@ -9,6 +9,7 @@ const emit = defineEmits(["delete", "edit"])
 </script>
 
 <template>
+  <!-- https://tailwindcomponents.com/component/post-card-course-online -->
   <div class="max-w-sm bg-white px-6 pt-6 pb-2 rounded-xl shadow-lg transform hover:scale-105 transition duration-500">
     <h3 class="mb-3 text-xl font-bold text-indigo-600">{{ product.title }}</h3>
     <div class="relative">
